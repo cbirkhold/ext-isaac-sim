@@ -71,10 +71,12 @@ install_dependencies = false
 [[dependency]]
 python = "../_build/target-deps/python"
 packages = [
-    # packages -- vision and audio do not have +cu128 versions
-    "torch==2.7.0+cu128",      # SWIPAT: https://nvbugs/3682155
-    "torchvision==0.22.0",     # SWIPAT: https://nvbugs/3433812
-    "torchaudio==2.7.0",
+    # For DGX Spark (linux-aarch64) these come from kit-kernel.
+    # "torch==2.9.0+cu130",      # SWIPAT: https://nvbugs/3682155
+    # "torchvision==0.24.0",     # SWIPAT: https://nvbugs/3433812
+
+    # For DGX Spark (linux-aarch64) upgrade torchaudio to match torch from kit-kernel.
+    "torchaudio==2.9.0",
 
     # dependencies
     "filelock==3.15.4",
@@ -83,7 +85,7 @@ packages = [
     "networkx==3.4.2",
     "sympy==1.13.3",
 ]
-extra_args = ["--extra-index-url", "https://download.pytorch.org/whl/cu128"]
+extra_args = ["--extra-index-url", "https://download.pytorch.org/whl/cu130"]
 target = "../_build/target-deps/isaac_ml_prebundle"
 platforms = ["*-aarch64"]
 download_only = false
@@ -93,6 +95,7 @@ install_dependencies = false
 
 
 # Windows torch does not need these so split them out. 
+# For DGX Spark (linux-aarch64) these come from kit-kernel.
 [[dependency]]
 python = "../_build/target-deps/python"
 packages = [
@@ -113,7 +116,7 @@ packages = [
 ]
 extra_args = ["--extra-index-url", "https://download.pytorch.org/whl/cu128"]
 target = "../_build/target-deps/isaac_ml_prebundle"
-platforms = ["linux-x86_64", "linux-aarch64"]
+platforms = ["linux-x86_64"]
 download_only = false
 append_to_install_folder = true
 gather_licenses_path = "../_build/PACKAGE-LICENSES/PIP-prebundled-LICENSES.txt"
