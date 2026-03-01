@@ -44,7 +44,8 @@ libdirs {
 -- Linux-specific compile information
 filter { "system:linux" }
 exceptionhandling("On")
-removeflags { "FatalCompileWarnings", "UndefinedIdentifiers" }
+removefatalwarnings { "All" }
+removeflags { "UndefinedIdentifiers" }
 includedirs {
     target_deps .. "/usd/%{config}/include/boost",
     target_deps .. "/python/include/python3.11",
